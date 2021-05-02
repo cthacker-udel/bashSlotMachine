@@ -9,7 +9,7 @@ read -p "Enter the amount to start with      " amount
 while true; do
     echo -e "\n1 to spin the slot machine, 2 to exit the game and display your amount"
     read val
-    if [ ! "$val" -eq 1 ]; then
+    if [ ! "$val" -ne 2 ]; then
         echo -e "\nYour amount is : $amount"
         exit 0
     else
@@ -49,21 +49,35 @@ while true; do
         #echo "Letter 1 : $letter1, Letter 2 : $letter2, Letter 3 : $letter3"
         if [ "$letter1" == "$letter2" -a "$letter1" == "$letter3" -a "$letter1" -eq 7 ]; then
             amountwon=$((wager * 10000))
-            echo "Congratulations! You won $amountwon!"
+            echo "Congratulations! Jackpot victory : Payout -> $amountwon!"
             amount=$((amount+amountwon))
             echo -e "\nYour amount : $amount\n"
+        elif [ "$letter1" -eq "$letter2" -a "$letter2" -eq "$letter3" -a "$letter1" -ne 7 ]; then
+            amountwon=$((wager * 20))
+            echo "Congratulations! You won $amountwon!"
+            amount=$((amount + amountwon))
+            echo -e "\nYour amount : $amount\n"
+        elif [ "$letter1" == "$letter2" -a "$letter1" -eq 7 ]; then
+            amountWon=$((wager * 10))
+            echo "Congratulations! You won $amountwon"
+            echo -e "\nYour amount : $amount\n"
+        elif [ "$letter2" -eq "$letter3" -a "$letter3" -eq 7 ]; then
+            amountwon=$((wager * 10))
+            echo "Congratulations! You won $amountwon"
+            amount=$((amountwon + amount))
+            echo -e "\nYour amount : $amount\n"
         elif [ "$letter1" == "$letter2" ]; then
-            amountwon=$((wager * 100))
+            amountwon=$((wager * 5))
             echo "Congratulations! You won $amountwon"
             amount=$((amount+amountwon))
             echo -e "\nYour amount : $amount\n"
         elif [ "$letter1" == "$letter3" ]; then
-            amountwon=$((wager * 100))
+            amountwon=$((wager * 5))
             echo "Congratulations! You won $amountwon"
             amount=$((amount+amountwon))
             echo -e "\nYour amount : $amount\n"
         elif [ "$letter2" == "$letter3" ]; then
-            amountwon=$((wager * 100))
+            amountwon=$((wager * 5))
             echo "Congratulations! You won $amountwon"
             amount=$((amount+amountwon))
             echo -e "\nYour amount : $amount\n"
